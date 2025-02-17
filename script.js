@@ -2,6 +2,7 @@
 // Initialize the promise with a 3-second delay
 new Promise((resolve) => {
     setTimeout(() => {
+        console.log('Initial array resolved');
         resolve([1, 2, 3, 4]);
     }, 3000);
 })
@@ -11,6 +12,7 @@ new Promise((resolve) => {
         setTimeout(() => {
             const evenNumbers = array.filter(num => num % 2 === 0);
             document.getElementById('output').textContent = evenNumbers.join(', ');
+            console.log('Even numbers displayed:', evenNumbers);
             resolve(evenNumbers);
         }, 1000);
     });
@@ -21,6 +23,7 @@ new Promise((resolve) => {
         setTimeout(() => {
             const doubledNumbers = evenNumbers.map(num => num * 2);
             document.getElementById('output').textContent = doubledNumbers.join(', ');
+            console.log('Doubled numbers displayed:', doubledNumbers);
             resolve(doubledNumbers);
         }, 2000);
     });
@@ -28,5 +31,3 @@ new Promise((resolve) => {
 .catch((error) => {
     console.error('An error occurred:', error);
 });
-
-
