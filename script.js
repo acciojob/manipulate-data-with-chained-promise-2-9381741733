@@ -1,33 +1,31 @@
-//your JS code here. If required.
-// Initialize the promise with a 3-second delay
-new Promise((resolve) => {
-    setTimeout(() => {
-        console.log('Initial array resolved');
-        resolve([1, 2, 3, 4]);
-    }, 3000);
-})
-.then((array) => {
-    // Filter out the odd numbers after 1-second delay
-    return new Promise((resolve) => {
+function manipulateArray() {
+    // Step 1: Create an initial promise that resolves after 3 seconds
+    new Promise((resolve) => {
         setTimeout(() => {
-            const evenNumbers = array.filter(num => num % 2 === 0);
-            document.getElementById('output').textContent = evenNumbers.join(', ');
-            console.log('Even numbers displayed:', evenNumbers);
-            resolve(evenNumbers);
-        }, 1000);
+            resolve([1, 2, 3, 4]);
+        }, 3000);
+    })
+    .then((arr) => {
+        // Step 2: Filter out odd numbers (only keep even numbers)
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const evenNumbers = arr.filter(num => num % 2 === 0);
+                document.getElementById("output").textContent = evenNumbers.join(",");
+                resolve(evenNumbers);
+            }, 1000);
+        });
+    })
+    .then((evenNumbers) => {
+        // Step 3: Multiply even numbers by 2
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const multipliedNumbers = evenNumbers.map(num => num * 2);
+                document.getElementById("output").textContent = multipliedNumbers.join(",");
+                resolve(multipliedNumbers);
+            }, 2000);
+        });
     });
-})
-.then((evenNumbers) => {
-    // Multiply even numbers by 2 after a 2-second delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const doubledNumbers = evenNumbers.map(num => num * 2);
-            document.getElementById('output').textContent = doubledNumbers.join(', ');
-            console.log('Doubled numbers displayed:', doubledNumbers);
-            resolve(doubledNumbers);
-        }, 2000);
-    });
-})
-.catch((error) => {
-    console.error('An error occurred:', error);
-});
+}
+
+// Call the function when the script loads
+manipulateArray();
